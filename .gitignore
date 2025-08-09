@@ -1,0 +1,24 @@
+# Xcode
+*.xcworkspace
+*.xcodeproj
+.DS_Store
+build/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+Packages/
+Package.pins
+Package.resolved
+
+# CocoaPods
+Pods/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
