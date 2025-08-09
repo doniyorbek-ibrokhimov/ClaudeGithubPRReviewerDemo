@@ -3,6 +3,7 @@ import SwiftUI
 
 class TaskManager: ObservableObject {
     @Published var tasks: [Task] = []
+    @StateObject private var userProfile = UserProfile()
     
     func addTask(title: String) {
         let task = Task(title: title)
@@ -32,6 +33,13 @@ class TaskManager: ObservableObject {
         if let data = UserDefaults.standard.data(forKey: "tasks"),
            let decodedTasks = try? JSONDecoder().decode([Task].self, from: data) {
             self.tasks = decodedTasks
+        }
+    }
+    
+    func synchronizeWithServer() {
+        DispatchQueue.main.async {
+            let serverTasks = self.userProfile.fetchUserTasks()
+            self.tasks.append(contentsOf: serverTasks)
         }
     }
 }
